@@ -96,6 +96,10 @@ jobs:
           # format: find PATH -type f -exec sed -i 's/TEMPLATE_KEY_NAME: template_value/'TEMPLATE_KEY_NAME: VALUE'/g' {} \;
           find deb/DEBIAN/control -type f -exec sed -i "s/Version: template_value/Version: $crate_version-$revision/g" {} \;
           find deb/DEBIAN/control -type f -exec sed -i "s/Architecture: template_value/Architecture: $(dpkg --print-architecture)/g" {} \;
+          install -Dm755 ./target/release/webx deb/usr/bin/napture
+          install -Dm644 ./io.github.face_hh.Napture.metainfo.xml -t deb/usr/share/metainfo/
+          install -Dm644 ./io.github.face_hh.Napture.desktop -t deb/usr/share/applications/
+          install -Dm644 ./io.github.face_hh.Napture.svg -t deb/usr/share/icons/hicolor/scalable/apps/
           # TODO: if needed, add post-install script to deb/DEBIAN/postinst
           dpkg-deb --build deb
           mv deb.deb napture-linux-nightly.deb
