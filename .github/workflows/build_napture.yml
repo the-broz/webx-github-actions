@@ -88,7 +88,7 @@ jobs:
       # Instructions taken from https://www.iodigital.com/en/history/intracto/creating-debianubuntu-deb-packages
       - name: Make deb package
         run: |
-          mkdir -p deb/DEBIAN
+          cd napture
           crate_version_raw=$(cargo metadata --format-version=1 --no-deps | jq '.packages[0].version')
           crate_version_raw_len=${#crate_version_raw}
           crate_version=$(echo $crate_version_raw | cut -c 2-$(expr $crate_version_raw_len - 1))
