@@ -89,12 +89,11 @@ jobs:
       - name: Make deb package
         run: |
           mkdir -p deb/DEBIAN
-          echo "
-          Package: Napture
-          Version: 1.2.3
-          Architecture: $(arch)
-          Description: An alternative for the World Wide Web - browse websites such as buss://yippie.rizz made in HTML, CSS and Lua.
-          " >> deb/DEBIAN/control
+          echo "Package: Napture" >> deb/DEBIAN/control
+          echo "Version: 1.2.3" >> deb/DEBIAN/control
+          # TODO: x86_64 is "invalid syntax" and will make the build fail
+          echo "Architecture: $(arch)" >> deb/DEBIAN/control
+          echo "Description: An alternative for the World Wide Web - browse websites such as buss://yippie.rizz made in HTML, CSS and Lua." >> deb/DEBIAN/control
           # TODO: if needed, add post-install script to deb/DEBIAN/postinst
           dpkg-deb --build deb
           mv deb.deb napture-linux-nightly.deb
@@ -105,6 +104,41 @@ jobs:
           path: napture-linux-nightly.deb
         env:
           UPLOAD_URL: ${{ steps.upload.outputs.upload_url }}
+
+  # build_rpm:
+  #   name: Build Napture (RPM, Ubuntu)
+  #   runs-on: ubuntu-24.04
+
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Install Dependencies
+  #       run: |
+  #         echo "Installing dependencies..."
+  #         sudo apt-get update
+  #         sudo apt-get install -y libglib2.0-dev libcairo2-dev libgraphene-1.0-dev libgtk-4-dev libadwaita-1-dev rpm
+  #         sudo add-apt-repository universe
+  #         sudo apt install libfuse2
+  #         echo "Dependencies installed."
+
+  #     - name: Build Napture
+  #       run: |
+  #         echo "Building Napture..."
+  #         cd napture
+  #         export PKG_CONFIG_PATH=/usr/lib/pkgconfig
+  #         cargo build --release --verbose
+  #         echo "Napture built successfully."
+  #     # Instructions taken from https://www.heatware.net/linux-tips/build-rpm-linux-centos-rhel-ubuntu/
+  #     - name: Make rpm package
+  #       run: |
+  #         # TODO
+  #     - name: Upload Artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: napture-linux-nightly.rpm
+  #         path: napture-linux-nightly.rpm
+  #       env:
+  #         UPLOAD_URL: ${{ steps.upload.outputs.upload_url }}
+
   build_macos:
     name: Build Napture (macOS)
     runs-on: macos-latest
