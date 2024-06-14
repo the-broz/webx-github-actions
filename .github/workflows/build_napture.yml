@@ -91,8 +91,9 @@ jobs:
           mkdir -p deb/DEBIAN
           echo "Package: Napture" >> deb/DEBIAN/control
           echo "Version: 1.2.3" >> deb/DEBIAN/control
-          # TODO: x86_64 is "invalid syntax" and will make the build fail
-          echo "Architecture: $(arch)" >> deb/DEBIAN/control
+          # HACK: assume x86_64 architecture for binaries
+          echo "Architecture: x86-64" >> deb/DEBIAN/control
+          echo "Maintainer: face-hh" >> deb/DEBIAN/control
           echo "Description: An alternative for the World Wide Web - browse websites such as buss://yippie.rizz made in HTML, CSS and Lua." >> deb/DEBIAN/control
           # TODO: if needed, add post-install script to deb/DEBIAN/postinst
           dpkg-deb --build deb
