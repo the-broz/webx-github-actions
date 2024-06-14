@@ -1,7 +1,6 @@
 Package: Napture
 Version: template_value
 Architecture: template_value
-# I got the email by checking the git commit log.
 Maintainer: face-hh <xxfacexc@gmail.com>
 Homepage: https://github.com/face-hh/webx
 Section: web
