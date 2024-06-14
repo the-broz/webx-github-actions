@@ -89,8 +89,10 @@ jobs:
       - name: Make deb package
         run: |
           mkdir -p deb/DEBIAN
-          crate_version=$(cargo metadata --format-version=1 --no-deps | jq '.packages[0].version' | jq 'sub("^\"|\"$"; "")'')
-          revision=$(git rev-parse HEAD | cut -c1-7)
+          crate_version_raw=$(cargo metadata --format-version=1 --no-deps | jq '.packages[0].version')
+          crate_version_raw_len=${#crate_version_raw}
+          crate_version=$(echo $crate_version_raw | cut -c 2-${crate_version_raw_len - 2})
+          revision=$(git rev-parse HEAD | cut -c 2-)
           echo "Package: Napture" >> deb/DEBIAN/control
           echo "Version: $crate_version-$revision" >> deb/DEBIAN/control
           echo "Architecture: $(dpkg --print-architecture)" >> deb/DEBIAN/control
