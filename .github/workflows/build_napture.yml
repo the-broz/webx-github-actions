@@ -94,6 +94,7 @@ jobs:
           # HACK: assume x86_64 architecture for binaries
           echo "Architecture: x86-64" >> deb/DEBIAN/control
           echo "Maintainer: face-hh" >> deb/DEBIAN/control
+          echo "Section: web" >> deb/DEBIAN/control
           echo "Description: An alternative for the World Wide Web - browse websites such as buss://yippie.rizz made in HTML, CSS and Lua." >> deb/DEBIAN/control
           # TODO: if needed, add post-install script to deb/DEBIAN/postinst
           dpkg-deb --build deb
