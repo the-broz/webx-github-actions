@@ -100,7 +100,6 @@ jobs:
           install -Dm644 ./io.github.face_hh.Napture.metainfo.xml -t deb/usr/share/metainfo/
           install -Dm644 ./io.github.face_hh.Napture.desktop -t deb/usr/share/applications/
           install -Dm644 ./io.github.face_hh.Napture.svg -t deb/usr/share/icons/hicolor/scalable/apps/
-          # TODO: if needed, add post-install script to deb/DEBIAN/postinst
           dpkg-deb --build deb
           mv deb.deb napture-linux-nightly.deb
       - name: Upload Artifact
