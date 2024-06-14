@@ -1,0 +1,10 @@
+Package: Napture
+Version: $crate_version-$revision
+Architecture: $(dpkg --print-architecture)
+# I got the email by checking the git commit log.
+Maintainer: face-hh <xxfacexc@gmail.com>
+Homepage: https://github.com/face-hh/webx
+Section: web
+Dependencies: curl, git, build-essential, cargo, libssl-dev, libglib2.0-dev, libcairo2-dev, libgraphene-1.0-dev, libgtk-4-dev, libadwaita-1-dev, liblua5.4-dev
+Bugs: https://github.com/face-hh/webx/issues
+Description: The client for webx, an alternative to the World Wide Web
