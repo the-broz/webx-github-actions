@@ -6,6 +6,10 @@
 target
 storage
 
+# CI script
+deb/*
+!deb/DEBIAN
+
 # maid
 .maid/cache
 .maid/temp
