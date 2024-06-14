@@ -94,7 +94,8 @@ jobs:
           echo "Architecture: $(dpkg --print-architecture)" >> deb/DEBIAN/control
           echo "Maintainer: face-hh" >> deb/DEBIAN/control
           echo "Section: web" >> deb/DEBIAN/control
-          echo "Description: An alternative for the World Wide Web - browse websites such as buss://yippie.rizz made in HTML, CSS and Lua." >> deb/DEBIAN/control
+          echo "Bugs: https://github.com/face-hh/webx/issues" >> deb/DEBIAN/control
+          echo "Description: The client for webx, an alternative for the World Wide Web" >> deb/DEBIAN/control
           # TODO: if needed, add post-install script to deb/DEBIAN/postinst
           dpkg-deb --build deb
           mv deb.deb napture-linux-nightly.deb
