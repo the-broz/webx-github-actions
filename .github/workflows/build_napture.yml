@@ -93,15 +93,9 @@ jobs:
           crate_version_raw_len=${#crate_version_raw}
           crate_version=$(echo $crate_version_raw | cut -c 2-$(expr $crate_version_raw_len - 1))
           revision=$(git rev-parse HEAD | cut -c 2-)
-          echo "Package: Napture" >> deb/DEBIAN/control
-          echo "Version: $crate_version-$revision" >> deb/DEBIAN/control
-          echo "Architecture: $(dpkg --print-architecture)" >> deb/DEBIAN/control
-          echo "Maintainer: face-hh" >> deb/DEBIAN/control
-          echo "Homepage: https://github.com/face-hh/webx" >> deb/DEBIAN/control
-          echo "Section: web" >> deb/DEBIAN/control
-          echo "Dependencies: curl, git, build-essential, cargo, libssl-dev, libglib2.0-dev, libcairo2-dev, libgraphene-1.0-dev, libgtk-4-dev, libadwaita-1-dev, liblua5.4-dev" >> deb/DEBIAN/control
-          echo "Bugs: https://github.com/face-hh/webx/issues" >> deb/DEBIAN/control
-          echo "Description: The client for webx, an alternative to the World Wide Web" >> deb/DEBIAN/control
+          # format: find PATH -type f -exec sed -i 's/TEMPLATE_KEY_NAME: template_value/'TEMPLATE_KEY_NAME: VALUE'/g' {} \;
+          find deb/control -type f -exec sed -i 's/Version: template_value/'Version: $crate_version-$revision'/g' {} \;
+          find deb/control -type f -exec sed -i 's/Architecture: template_value/'Architecture: $(dpkg --print-architecture)'/g' {} \;
           # TODO: if needed, add post-install script to deb/DEBIAN/postinst
           dpkg-deb --build deb
           mv deb.deb napture-linux-nightly.deb
