@@ -7,3 +7,5 @@ Section: web
 Dependencies: curl, git, build-essential, cargo, libssl-dev, libglib2.0-dev, libcairo2-dev, libgraphene-1.0-dev, libgtk-4-dev, libadwaita-1-dev, liblua5.4-dev
 Bugs: https://github.com/face-hh/webx/issues
 Description: The client for webx, an alternative to the World Wide Web
+  An alternative for the World Wide Web - browse websites such as buss://yippie.rizz made in HTML, CSS and Lua.
+  Custom web browser, custom HTML rendering engine, custom search engine, and more.
