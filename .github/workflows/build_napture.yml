@@ -94,8 +94,8 @@ jobs:
           crate_version=$(echo $crate_version_raw | cut -c 2-$(expr $crate_version_raw_len - 1))
           revision=$(git rev-parse HEAD | cut -c 2-)
           # format: find PATH -type f -exec sed -i 's/TEMPLATE_KEY_NAME: template_value/'TEMPLATE_KEY_NAME: VALUE'/g' {} \;
-          find deb/DEBIAN/control -type f -exec sed -i 's/Version: template_value/'Version: $crate_version-$revision'/g' {} \;
-          find deb/DEBIAN/control -type f -exec sed -i 's/Architecture: template_value/'Architecture: $(dpkg --print-architecture)'/g' {} \;
+          find deb/DEBIAN/control -type f -exec sed -i "s/Version: template_value/Version: $crate_version-$revision/g" {} \;
+          find deb/DEBIAN/control -type f -exec sed -i "s/Architecture: template_value/Architecture: $(dpkg --print-architecture)/g" {} \;
           # TODO: if needed, add post-install script to deb/DEBIAN/postinst
           dpkg-deb --build deb
           mv deb.deb napture-linux-nightly.deb
