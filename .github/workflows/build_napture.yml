@@ -99,6 +99,7 @@ jobs:
           echo "Maintainer: face-hh" >> deb/DEBIAN/control
           echo "Homepage: https://github.com/face-hh/webx" >> deb/DEBIAN/control
           echo "Section: web" >> deb/DEBIAN/control
+          echo "Dependencies: curl, git, build-essential, cargo, libssl-dev, libglib2.0-dev, libcairo2-dev, libgraphene-1.0-dev, libgtk-4-dev, libadwaita-1-dev, liblua5.4-dev" >> deb/DEBIAN/control
           echo "Bugs: https://github.com/face-hh/webx/issues" >> deb/DEBIAN/control
           echo "Description: The client for webx, an alternative to the World Wide Web" >> deb/DEBIAN/control
           # TODO: if needed, add post-install script to deb/DEBIAN/postinst
@@ -273,6 +274,7 @@ jobs:
         run: |
           sudo add-apt-repository universe
           sudo apt install libfuse2
+
       - name: Publish to Releases
         uses: softprops/action-gh-release@v2.0.5
         env:
